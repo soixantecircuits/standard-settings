@@ -17,3 +17,54 @@ Note: First settings loaded are stronger than last one
 ### settings files
 `settings/settings.json`  
 `settings/settings.default.json`
+
+
+## Schema  
+
+The following schema is an example of settings used in Soixante circuits apps:
+
+```
+{
+  "server": {
+      "host" : "myip",
+      "port" : "3333"
+  },
+  "timeout": {
+    "lookbook": 5,
+    "popup": 4
+  },
+  "folder": {
+    "kcDownloader": "path-to/data",
+    "lookbook": "path-to/lookbook"
+  },
+  "flag": {
+    "stabalize": true,
+    "devMode": true
+  },
+  "customKey": {
+    "maxImageNumber": 64
+  },
+  "meta": {
+      "title": "",
+      "description": "",
+      "message": "...",
+      "source": ""
+  },
+  "service": {
+    "altruist": {
+      "host" : "192.168.1.6",
+      "port" : "6666"
+    },
+    "spacebro": {
+      "host" : "192.168.1.6",
+      "port" : "8888",
+      "channel": "lachaine",
+      "client" : "nomdelapp",
+      "inputMessage": "new-media",
+      "outputMessage": "new-media-processed"
+    }
+  }
+}
+```
+
+See [soixantecircuits/standard](https://github.com/soixantecircuits/standard)
