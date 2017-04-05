@@ -13,7 +13,7 @@
 const nconf = require('nconf')
 const fs = require('fs')
 
-function load () {
+module.exports = () => {
   nconf.env({
     lowerCase: true,
     separator: '_'
@@ -30,6 +30,6 @@ function load () {
 
   nconf.file({ file: './settings/settings.json' })
   .file('default', './settings/settings.default.json')
-}
 
-module.exports = { load }
+  return nconf.get()
+}
