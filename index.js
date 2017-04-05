@@ -6,30 +6,40 @@
 // settings file located at `settings/settings.json`
 // settings file located at `settings/settings.default.json`
 
-// TODO: load settings in data too
-
 'use strict'
 
 const nconf = require('nconf')
 const fs = require('fs')
 
-module.exports = () => {
-  nconf.env({
-    lowerCase: true,
-    separator: '_'
-  })
-  .argv()
+nconf.env({
+  lowerCase: true,
+  separator: '_'
+})
+.argv()
 
-  if (nconf.get('settings') !== undefined) {
-    if (!fs.existsSync(nconf.get('settings'))) {
-      console.warn('File ' + nconf.get('settings') + ' does not exist and was not loaded. Other settings applied.')
-    } else {
-      nconf.file('cli', nconf.get('settings'))
-    }
+if (nconf.get('settings') !== undefined) {
+  if (!fs.existsSync(nconf.get('settings'))) {
+    console.warn('File ' + nconf.get('settings') + ' does not exist and was not loaded. Other settings applied.')
+  } else {
+    nconf.file('cli', nconf.get('settings'))
   }
+}
 
-  nconf.file({ file: './settings/settings.json' })
-  .file('default', './settings/settings.default.json')
+nconf.file({ file: './settings/settings.json' })
+.file('default', './settings/settings.default.json')
 
-  return nconf.get()
+function getMeta(media) {
+  let defaultMeta = nconf.get('media:meta')
+  if (defaultMeta === undefined) {
+    defaultMeta = {}
+  }
+  if (media) {
+    return Object.assign(defaultMeta, media.meta)
+  } else {
+    return defaultMeta
+  }
+}
+
+module.exports = {
+  getMeta
 }

@@ -1,22 +1,55 @@
 # standard-settings
 Standardised settings loader
 
-Note: First settings loaded are stronger than last one  
+
+## Installation
+
+`npm install standard-settings --save`  
+or  
+`yarn add standard-settings`
+
+
+## Usage
+
+This module loads settings and store them using [nconf](https://github.com/indexzero/nconf).  
+It should be required at the very beginning of your project:
+```
+  const standardSettings = require('standard-settings')
+```
+Then your settings are accessible from any file in your project using:
+```
+  const settings = require('nconf').get()
+```
+If you need to directly access a specific field inside your settings, you can use:
+```
+  const port = require('nconf').get('server:port')
+```
+
+
+## API
+
+### getMeta(media)
+  - **parameters**: media (Object)
+  - **returns**: meta (Object)
+  - **description**: This function creates a new object resulting from the overload of the `media.meta` (from settings) with the `media.meta` (from media parameter) and returns its content.
+
 
 ## Priority order  
 
-### env
-`$ SERVER_PORT=2500 node index.js` or `$ service_spacebro_inputMessage=new-media node index.js`  
+### Environment variables
+Example:  
+`$ SERVER_PORT=2500 node index.js`  
+`$ service_spacebro_inputMessage=new-media node index.js`  
 
-### argv
-`$ node index.js --server.port 2000`  
+### Command line parameters (argv)
+Example:  
+`$ node index.js --server.port 2000` to specify a field  
+`$ node index.js --settings settings/settings.prod.json` to specify a settings file  
 
-### settings file with argv
-`$ node index.js --settings settings/settings.prod.json`  
-
-### settings files
-`settings/settings.json`  
-`settings/settings.default.json`
+### Files
+These files are loaded if no `--settings` option is provided:  
+`settings/settings.json` first  
+`settings/settings.default.json` (if the first one does not exists)  
 
 
 ## Schema  
