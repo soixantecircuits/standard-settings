@@ -2,7 +2,9 @@
 Standardised settings loader
 
 Note: First settings loaded are stronger than last one  
-## Priority order
+
+## Priority order  
+
 ### env
 `$ SERVER_PORT=2500 node index.js` or `$ service_spacebro_inputMessage=new-media node index.js`  
 
