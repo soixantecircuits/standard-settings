@@ -28,9 +28,9 @@ if (nconf.get('settings') !== undefined) {
 if (fs.existsSync(path.resolve(process.cwd(), 'settings/settings.json'))) {
   nconf.file({ file: path.resolve(process.cwd(), 'settings/settings.json')})
   .file('default', path.resolve(process.cwd(), 'settings/settings.default.json'))
-} else if (fs.existsSync(path.resolve(require.main.filename, 'settings/settings.json'))) {
-  nconf.file({ file: path.resolve(require.main.filename, 'settings/settings.json')})
-  .file('default', path.resolve(require.main.filename, 'settings/settings.default.json'))
+} else if (fs.existsSync(path.resolve(path.dirname(require.main.filename), 'settings/settings.json'))) {
+  nconf.file({ file: path.resolve(path.dirname(require.main.filename), 'settings/settings.json')})
+  .file('default', path.resolve(path.dirname(require.main.filename), 'settings/settings.default.json'))
 } else {
   nconf.file({ file: path.resolve('.', 'settings/settings.json')})
   .file('default', path.resolve('.', 'settings/settings.default.json'))
