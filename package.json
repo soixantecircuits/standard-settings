@@ -4,7 +4,7 @@
   "description": "Standardised settings loader",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,8 @@
   },
   "engines": {
     "node": ">=v6.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1"
   }
 }

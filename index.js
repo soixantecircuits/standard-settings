@@ -43,5 +43,7 @@ function getMeta(media) {
 
 module.exports = {
   getMeta,
-  getSettings: nconf.get
+  getSettings: () => {
+    return nconf.get()
+  }
 }
