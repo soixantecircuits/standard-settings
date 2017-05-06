@@ -23,5 +23,8 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "nconf": "^0.8.4"
+  },
+  "engines": {
+    "node": ">=v6.0.0"
   }
 }

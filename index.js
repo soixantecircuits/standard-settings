@@ -10,6 +10,7 @@
 
 const nconf = require('nconf')
 const fs = require('fs')
+const path = require('path')
 
 nconf.env({
   lowerCase: true,
@@ -25,8 +26,8 @@ if (nconf.get('settings') !== undefined) {
   }
 }
 
-nconf.file({ file: './settings/settings.json' })
-.file('default', './settings/settings.default.json')
+nconf.file({ file: path.resolve(path.dirname(require.main.filename), 'settings/settings.json')})
+.file('default', path.resolve(path.dirname(require.main.filename), 'settings/settings.default.json'))
 
 function getMeta(media) {
   let defaultMeta = nconf.get('media:meta')
@@ -41,5 +42,6 @@ function getMeta(media) {
 }
 
 module.exports = {
-  getMeta
+  getMeta,
+  getSettings: nconf.get
 }
