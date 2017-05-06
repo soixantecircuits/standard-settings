@@ -18,12 +18,14 @@ It should be required at the very beginning of your project:
 ```
 Then your settings are accessible from any file in your project using:
 ```
-  const settings = require('nconf').get()
+  const settings = standardSettings.get()
 ```
 If you need to directly access a specific field inside your settings, you can use:
 ```
-  const port = require('nconf').get('server:port')
+  const port = standardSettings.get('server:port')
 ```
+
+Under the hood, it is exactly the same as nconf.
 
 
 ## API
