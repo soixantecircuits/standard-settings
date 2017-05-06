@@ -26,8 +26,8 @@ if (nconf.get('settings') !== undefined) {
   }
 }
 
-nconf.file({ file: path.resolve(path.dirname(require.main.filename), 'settings/settings.json')})
-.file('default', path.resolve(path.dirname(require.main.filename), 'settings/settings.default.json'))
+nconf.file({ file: path.resolve(process.cwd(), 'settings/settings.json')})
+.file('default', path.resolve(process.cwd(), 'settings/settings.default.json'))
 
 function getMeta(media) {
   let defaultMeta = nconf.get('media:meta')
