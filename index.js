@@ -11,6 +11,8 @@
 const nconf = require('nconf')
 const fs = require('fs')
 const path = require('path')
+const primarySettingsPath = 'settings/settings.json'
+const secondarySettingsPath = 'settings/settings.default.json'
 
 nconf.env({
   lowerCase: true,
@@ -25,18 +27,18 @@ if (nconf.get('settings') !== undefined) {
     nconf.file('cli', nconf.get('settings'))
   }
 }
-if (fs.existsSync(path.resolve(process.cwd(), 'settings/settings.json'))) {
-  nconf.file({ file: path.resolve(process.cwd(), 'settings/settings.json')})
-  .file('default', path.resolve(process.cwd(), 'settings/settings.default.json'))
-} else if (fs.existsSync(path.resolve(path.dirname(require.main.filename), 'settings/settings.json'))) {
-  nconf.file({ file: path.resolve(path.dirname(require.main.filename), 'settings/settings.json')})
-  .file('default', path.resolve(path.dirname(require.main.filename), 'settings/settings.default.json'))
-} else {
-  nconf.file({ file: path.resolve('.', 'settings/settings.json')})
-  .file('default', path.resolve('.', 'settings/settings.default.json'))
+
+let lookUpPath = '.'
+if (fs.existsSync(path.resolve(process.cwd(), primarySettingsPath))) {
+  lookUpPath = process.cwd()
+} else if (fs.existsSync(path.resolve(path.dirname(require.main.filename), primarySettingsPath))) {
+  lookUpPath = require.main.filename
 }
 
-function getMeta(media) {
+nconf.file({file: path.resolve(lookUpPath, primarySettingsPath)})
+  .file('default', path.resolve(lookUpPath, secondarySettingsPath))
+
+var getMeta = media => {
   let defaultMeta = nconf.get('media:meta')
   if (defaultMeta === undefined) {
     defaultMeta = {}

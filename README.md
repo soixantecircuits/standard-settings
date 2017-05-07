@@ -18,7 +18,7 @@ It should be required at the very beginning of your project:
 ```
 Then your settings are accessible from any file in your project using:
 ```
-  const settings = standardSettings.get()
+  const settings = standardSettings.getSettings()
 ```
 If you need to directly access a specific field inside your settings, you can use:
 ```
@@ -62,7 +62,7 @@ The following schema is an example of settings used in Soixante circuits apps:
 {
   "server": {
       "host" : "myip",
-      "port" : "3333"
+      "port" : 3333
   },
   "timeout": {
     "lookbook": 5,
@@ -88,13 +88,13 @@ The following schema is an example of settings used in Soixante circuits apps:
   "service": {
     "altruist": {
       "host" : "192.168.1.6",
-      "port" : "6666"
+      "port" : 6666
     },
     "spacebro": {
       "host" : "192.168.1.6",
-      "port" : "8888",
-      "channel": "lachaine",
-      "client" : "nomdelapp",
+      "port" : 8888,
+      "channel": "my-channel",
+      "client" : "my-app",
       "inputMessage": "new-media",
       "outputMessage": "new-media-processed"
     }
