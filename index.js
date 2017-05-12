@@ -13,6 +13,7 @@ const fs = require('fs')
 const path = require('path')
 const primarySettingsPath = 'settings/settings.json'
 const secondarySettingsPath = 'settings/settings.default.json'
+const assignment = require('assignment')
 
 nconf.env({
   lowerCase: true,
@@ -44,7 +45,7 @@ var getMeta = media => {
     defaultMeta = {}
   }
   if (media) {
-    return Object.assign(defaultMeta, media.meta)
+    return assignment(defaultMeta, media.meta)
   } else {
     return defaultMeta
   }
