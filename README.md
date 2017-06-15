@@ -8,6 +8,14 @@ Standardised settings loader
 or  
 `yarn add standard-settings`
 
+## Why
+
+No more `cp config.sample.json config.json`
+
+Your app presents a `settings/settings.default.json` which is always included.
+User or other developer needing custom settings loads his custom settings which overrides the default settings.
+If a key is missing in user settings, it won't trigger errors, as a default value is in `settings.default.json`
+`standard-settings` offers multiple ways to change settings: `settings.json` file, command line arguments, environment variables. Check below examples for usage and priority order.
 
 ## Usage
 
