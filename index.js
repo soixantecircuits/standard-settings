@@ -33,7 +33,7 @@ let settingsPath = '.'
 let lookUpPaths = [
   process.cwd(),
   require.main.filename,
-  path.resolve(path.dirname(require.main.filename), '../../../'), // inside electron 
+  path.resolve(path.dirname(require.main.filename), '../../../'), // inside electron
   path.resolve(path.dirname(require.main.filename), '../../../app.asar.unpacked/') // inside electron with asar
 ]
 for (let lookUpPath in lookUpPaths) {
