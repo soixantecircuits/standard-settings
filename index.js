@@ -55,6 +55,7 @@ var getMeta = media => {
   if (defaultMeta === undefined) {
     defaultMeta = {}
   }
+  defaultMeta = JSON.parse(JSON.stringify(defaultMeta))
   if (media) {
     return assignment(defaultMeta, media.meta)
   } else {
