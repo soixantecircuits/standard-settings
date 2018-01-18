@@ -16,5 +16,5 @@ test(t => {
   let settings = standardSettings.getSettings()
   t.deepEqual(settings.server.host, '127.0.0.1')
   t.deepEqual(settings.server.port, 8888)
-  t.deepEqual(settings.timeout, 6060)
+  t.deepEqual(settings.timeout, 0)
 })
