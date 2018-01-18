@@ -1,41 +1,7 @@
 {
   "server": {
-      "host" : "myip",
-      "port" : 3333
+      "host" : "127.0.0.1",
+      "port" : 8888
   },
-  "timeout": {
-    "lookbook": 5,
-    "popup": 4
-  },
-  "folder": {
-    "kcDownloader": "path-to/data",
-    "lookbook": "path-to/lookbook"
-  },
-  "flag": {
-    "stabalize": true,
-    "devMode": true
-  },
-  "customKey": {
-    "maxImageNumber": 64
-  },
-  "meta": {
-      "title": "",
-      "description": "",
-      "message": "...",
-      "source": ""
-  },
-  "service": {
-    "altruist": {
-      "host" : "192.168.1.6",
-      "port" : 6666
-    },
-    "spacebro": {
-      "host" : "192.168.1.6",
-      "port" : 8888,
-      "channel": "my-channel",
-      "client" : "my-app",
-      "inputMessage": "new-media",
-      "outputMessage": "new-media-processed"
-    }
-  }
+  "timeout": 0
 }

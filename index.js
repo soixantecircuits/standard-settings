@@ -14,6 +14,7 @@ const path = require('path')
 const primarySettingsPath = 'settings/settings.json'
 const secondarySettingsPath = 'settings/settings.default.json'
 const assignment = require('assignment')
+let lookUpPath = '.'
 
 nconf.env({
   lowerCase: true,
@@ -29,15 +30,14 @@ if (nconf.get('settings') !== undefined) {
   }
 }
 
-let lookUpPath = '.'
+if (!fs.existsSync(path.resolve(lookUpPath, secondarySettingsPath))) {
+  console.warn('Cannot find ' + path.resolve(lookUpPath, secondarySettingsPath))
+}
+
 if (fs.existsSync(path.resolve(process.cwd(), secondarySettingsPath))) {
   lookUpPath = process.cwd()
 } else if (fs.existsSync(path.resolve(path.dirname(require.main.filename), secondarySettingsPath))) {
   lookUpPath = path.dirname(require.main.filename)
-}
-
-if (!fs.existsSync(path.resolve(lookUpPath, secondarySettingsPath))) {
-  console.warn('Cannot find ' + path.resolve(lookUpPath, secondarySettingsPath))
 }
 
 nconf.file({file: path.resolve(lookUpPath, primarySettingsPath)})
@@ -57,6 +57,9 @@ var getMeta = media => {
 
 module.exports = {
   getMeta,
+  get: (key) => {
+    return nconf.get(key)
+  },
   getSettings: () => {
     return nconf.get()
   }
