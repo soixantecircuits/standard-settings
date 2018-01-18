@@ -1,9 +1,21 @@
-# standard-settings
-Standardised settings loader
+_**Standard settings** — automatic settings loader_
+
+A standardised settings loader. 
+
+No more `cp config.sample.json config.json` !
+
+### Features
+ - **Automatic**: load of default _settings.default.json_ file
+ - **Easy**: customization of default settings (_settings.json_ file)
+ - **Granular**: customization of settings through runtime arguments (--port=3000 --name=foo)
+ - **Fast**: settings overide by environment variables
+ - **Bulletproof**: runs in node and electron
+
+
 
 ## ❓Why ?
 
-No more `cp config.sample.json config.json`. Keep the original **settings** and tinker easily with your own **settings**.
+Keep the original **settings** and tinker easily with your own **settings**.
 
 The app you developped will present a `settings/settings.default.json` which will always be included.
 
