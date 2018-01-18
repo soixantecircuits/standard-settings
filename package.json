@@ -1,6 +1,6 @@
 {
   "name": "standard-settings",
-  "version": "1.1.7",
+  "version": "1.1.10",
   "description": "Standardised settings loader",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,7 @@
   "homepage": "https://github.com/soixantecircuits/standard-settings#readme",
   "dependencies": {
     "assignment": "^2.2.1",
-    "fs": "^0.0.1-security",
-    "nconf": "^0.8.4"
+    "nconf": "0.10.0"
   },
   "engines": {
     "node": ">=v6.0.0"

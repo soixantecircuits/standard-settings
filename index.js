@@ -14,7 +14,6 @@ const path = require('path')
 const primarySettingsPath = 'settings/settings.json'
 const secondarySettingsPath = 'settings/settings.default.json'
 const assignment = require('assignment')
-let lookUpPath = '.'
 
 nconf.env({
   lowerCase: true,
@@ -30,24 +29,33 @@ if (nconf.get('settings') !== undefined) {
   }
 }
 
-if (!fs.existsSync(path.resolve(lookUpPath, secondarySettingsPath))) {
-  console.warn('Cannot find ' + path.resolve(lookUpPath, secondarySettingsPath))
+let settingsPath = '.'
+let lookUpPaths = [
+  process.cwd(),
+  require.main.filename,
+  path.resolve(path.dirname(require.main.filename), '../../../'), // inside electron
+  path.resolve(path.dirname(require.main.filename), '../../../app.asar.unpacked/') // inside electron with asar
+]
+for (let lookUpPath in lookUpPaths) {
+  if (fs.existsSync(path.resolve(lookUpPaths[lookUpPath], secondarySettingsPath))) {
+    settingsPath = lookUpPaths[lookUpPath]
+    break
+  }
 }
 
-if (fs.existsSync(path.resolve(process.cwd(), secondarySettingsPath))) {
-  lookUpPath = process.cwd()
-} else if (fs.existsSync(path.resolve(path.dirname(require.main.filename), secondarySettingsPath))) {
-  lookUpPath = path.dirname(require.main.filename)
+if (!fs.existsSync(path.resolve(settingsPath, secondarySettingsPath))) {
+  console.warn('Settings not found ' + secondarySettingsPath)
 }
 
-nconf.file({file: path.resolve(lookUpPath, primarySettingsPath)})
-  .file('default', path.resolve(lookUpPath, secondarySettingsPath))
+nconf.file({file: path.resolve(settingsPath, primarySettingsPath)})
+  .file('default', path.resolve(settingsPath, secondarySettingsPath))
 
 var getMeta = media => {
   let defaultMeta = nconf.get('media:meta')
   if (defaultMeta === undefined) {
     defaultMeta = {}
   }
+  defaultMeta = JSON.parse(JSON.stringify(defaultMeta))
   if (media) {
     return assignment(defaultMeta, media.meta)
   } else {
