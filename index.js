@@ -32,11 +32,19 @@ if (nconf.get('settings') !== undefined) {
 let settingsPath = '.'
 let lookUpPaths = [
   process.cwd(),
-  require.main.filename,
-  path.dirname(process.argv[1]),
-  path.resolve(path.dirname(require.main.filename), '../../../'), // inside electron
-  path.resolve(path.dirname(require.main.filename), '../../../app.asar.unpacked/') // inside electron with asar
+  require.main.filename
 ]
+if (path.dirname(process.argv[0]) !== undefined) {
+  lookUpPaths.push(path.dirname(process.argv[0]))
+}
+
+if (path.dirname(process.argv[1]) !== undefined) {
+  lookUpPaths.push(path.dirname(process.argv[1]))
+}
+
+lookUpPaths.push(path.resolve(path.dirname(require.main.filename), '../../../')) // inside electron
+lookUpPaths.push(path.resolve(path.dirname(require.main.filename), '../../../app.asar.unpacked/')) // inside electron with asar)
+
 for (let lookUpPath in lookUpPaths) {
   if (fs.existsSync(path.resolve(lookUpPaths[lookUpPath], secondarySettingsPath))) {
     settingsPath = lookUpPaths[lookUpPath]
