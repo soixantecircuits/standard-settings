@@ -34,11 +34,11 @@ let lookUpPaths = [
   process.cwd(),
   require.main.filename
 ]
-if (path.dirname(process.argv[0]) !== undefined) {
+if (process.argv[0] !== undefined) {
   lookUpPaths.push(path.dirname(process.argv[0]))
 }
 
-if (path.dirname(process.argv[1]) !== undefined) {
+if (process.argv[1] !== undefined) {
   lookUpPaths.push(path.dirname(process.argv[1]))
 }
 
