@@ -1,6 +1,6 @@
 {
   "name": "standard-settings",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "description": "Standardised settings loader",
   "main": "index.js",
   "scripts": {
