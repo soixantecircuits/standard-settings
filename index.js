@@ -11,8 +11,8 @@
 const nconf = require('nconf')
 const fs = require('fs')
 const path = require('path')
-const primarySettingsPath = path.join('settings','settings.json')
-const secondarySettingsPath = path.join('settings','settings.default.json')
+const primarySettingsPath = path.join('settings', 'settings.json')
+const secondarySettingsPath = path.join('settings', 'settings.default.json')
 const assignment = require('assignment')
 
 nconf.env({
@@ -42,8 +42,9 @@ if (process.argv[1] !== undefined) {
   lookUpPaths.push(path.dirname(process.argv[1]))
 }
 
-lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..','..','..'))) // inside electron
-lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..','..','..','app.asar.unpacked'))) // inside electron with asar
+lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..', '..', '..'))) // inside electron
+lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..', '..', '..', 'app.asar.unpacked'))) // inside electron with asar
+lookUpPaths.push(process.execPath)
 
 for (let lookUpPath in lookUpPaths) {
   if (fs.existsSync(path.resolve(lookUpPaths[lookUpPath], secondarySettingsPath))) {
@@ -53,7 +54,7 @@ for (let lookUpPath in lookUpPaths) {
 }
 
 if (!fs.existsSync(path.resolve(settingsPath, secondarySettingsPath))) {
-  console.warn('Settings not found ' + secondarySettingsPath)
+  console.warn(`Default settings not found at: ${path.resolve(settingsPath, secondarySettingsPath)}`)
 }
 
 nconf.file({file: path.resolve(settingsPath, primarySettingsPath)})
