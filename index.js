@@ -43,7 +43,7 @@ if (process.argv[1] !== undefined) {
 }
 
 lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..','..','..'))) // inside electron
-lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..','..','..','app.asar.unpacked')) // inside electron with asar)
+lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..','..','..','app.asar.unpacked'))) // inside electron with asar
 
 for (let lookUpPath in lookUpPaths) {
   if (fs.existsSync(path.resolve(lookUpPaths[lookUpPath], secondarySettingsPath))) {
