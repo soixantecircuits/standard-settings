@@ -50,6 +50,36 @@ These files are always loaded if present:
 `settings/settings.json` first  
 `settings/settings.default.json`
 
+## Settings Load override order
+
+As per `standard-settings` rules, **environement variable** will always take precedence over keys that could be set by command line argument or via file
+
+1. The `settings.default.json` file which is in `settings` folder of your main app
+2. The `settings.json` file which is in `settings` folder of your main app
+
+3. Via a setting file through the command line
+  
+    Example:
+  
+    `$ node index.js --settings settings/settings.prod.json` to specify a settings file wich will override `server.port`
+
+3. Via command line parameters (argv)
+  
+    Example:
+    
+    `$ node index.js --server.port 2000` to specify a field
+
+    This means that if you pass a `settings` file with `--settings` argument, the target key will override the value in the settings.
+
+5. ### Environment variables
+
+    Example:
+
+    `$ SERVER_PORT=2500 node index.js`  
+    `$ service_spacebro_inputMessage=new-media node index.js` 
+
+    This means that if you pass a `settings` file with `--settings` argument, or a target key with command line like `--server.port` the environment variable will be the final value.
+
 ## 👋 Usage inside Node.js or Electron
 
 We recommand to require it at the very beginning of your project file:
@@ -74,7 +104,7 @@ Under the hood, it is exactly the same as [nconf](https://github.com/indexzero/n
 ## API
 
 ### getSettings()
-  - **returns**: full settings (JSON Object)
+  - **returns**: full settings, environement included (JSON Object)
   - **description**: This function creates a new object resulting from the overload of the `settings` (from settings.default) with the `settings` value (from settings.json) and returns its content.
 
 ### get(flatKey)
@@ -86,21 +116,6 @@ Under the hood, it is exactly the same as [nconf](https://github.com/indexzero/n
   - **parameters**: media (Object)
   - **returns**: meta (Object)
   - **description**: This function creates a new object resulting from the overload of the `media.meta` (from settings) with the `media.meta` (from media parameter) and returns its content.
-
-
-## Load priority order  
-
-### Environment variables
-Example:  
-
-`$ SERVER_PORT=2500 node index.js`  
-`$ service_spacebro_inputMessage=new-media node index.js`  
-
-### Command line parameters (argv)
-Example:
-
-`$ node index.js --server.port 2000` to specify a field  
-`$ node index.js --settings settings/settings.prod.json` to specify a settings file  
 
 ## Working all together with different settings
 
