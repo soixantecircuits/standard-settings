@@ -78,6 +78,10 @@ As per `standard-settings` rules, **environement variable** will always take pre
     `$ SERVER_PORT=2500 node index.js`  
     `$ service_spacebro_inputMessage=new-media node index.js` 
 
+    `$SERVER_PORT=6666 node examples/index.js --settings ./settings/settings.production.json --server.port 2000`
+
+    Here, the `SERVER_PORT` env will always win. You'll endup with a 6666 value for the key `port`of the key `server` 
+
     This means that if you pass a `settings` file with `--settings` argument, or a target key with command line like `--server.port` the environment variable will be the final value.
 
 ## 👋 Usage inside Node.js or Electron
