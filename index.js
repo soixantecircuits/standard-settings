@@ -42,8 +42,10 @@ if (process.argv[1] !== undefined) {
   lookUpPaths.push(path.dirname(process.argv[1]))
 }
 
-lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..', '..', '..'))) // inside electron
-lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..', '..', '..', 'app.asar.unpacked'))) // inside electron with asar
+if (require.main.filename) {
+  lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..', '..', '..'))) // inside electron
+  lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..', '..', '..', 'app.asar.unpacked'))) // inside electron with asar
+}
 lookUpPaths.push(process.execPath)
 
 for (let lookUpPath in lookUpPaths) {
