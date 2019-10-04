@@ -14,6 +14,7 @@ const path = require('path')
 const primarySettingsPath = path.join('settings', 'settings.json')
 const secondarySettingsPath = path.join('settings', 'settings.default.json')
 const assignment = require('assignment')
+const main = require('require-main-filename')()
 
 nconf.env({
   lowerCase: true,
@@ -32,21 +33,28 @@ if (nconf.get('settings') !== undefined) {
 let settingsPath = '.'
 let lookUpPaths = [
   process.cwd(),
-  require.main.filename
+  main
 ]
 if (process.argv[0] !== undefined) {
   lookUpPaths.push(path.dirname(process.argv[0]))
+  lookUpPaths.push(path.resolve(path.dirname(process.argv[0]), '..'))
 }
 
 if (process.argv[1] !== undefined) {
   lookUpPaths.push(path.dirname(process.argv[1]))
+  lookUpPaths.push(path.resolve(path.dirname(process.argv[1])))
+  lookUpPaths.push(path.resolve(path.dirname(process.argv[1]), '..'))
 }
 
-if (require.main.filename) {
-  lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..', '..', '..'))) // inside electron
-  lookUpPaths.push(path.resolve(path.dirname(require.main.filename), path.join('..', '..', '..', 'app.asar.unpacked'))) // inside electron with asar
+if (main) {
+  lookUpPaths.push(path.resolve(path.dirname(main)))
+  lookUpPaths.push(path.resolve(path.dirname(main), '..'))
+  lookUpPaths.push(path.resolve(path.dirname(main), path.join('..', '..', '..'))) // inside electron legacy
+  lookUpPaths.push(path.resolve(path.dirname(main), path.join('..', '..', '..', 'app.asar.unpacked'))) // inside electron with asar legacy
 }
 lookUpPaths.push(process.execPath)
+
+console.log(lookUpPaths)
 
 for (let lookUpPath in lookUpPaths) {
   if (fs.existsSync(path.resolve(lookUpPaths[lookUpPath], secondarySettingsPath))) {
@@ -56,7 +64,7 @@ for (let lookUpPath in lookUpPaths) {
 }
 
 if (!fs.existsSync(path.resolve(settingsPath, secondarySettingsPath))) {
-  console.warn(`Default settings not found at: ${path.resolve(settingsPath, secondarySettingsPath)}`)
+  console.warn(`WARNING - Default settings not found at: ${path.resolve(settingsPath, secondarySettingsPath)}`)
 }
 
 nconf.file({file: path.resolve(settingsPath, primarySettingsPath)})

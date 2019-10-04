@@ -6,6 +6,9 @@
   "scripts": {
     "test": "ava"
   },
+  "files": [
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/soixantecircuits/standard-settings.git"
@@ -22,10 +25,11 @@
   "homepage": "https://github.com/soixantecircuits/standard-settings#readme",
   "dependencies": {
     "assignment": "^2.2.1",
-    "nconf": "0.10.0"
+    "nconf": "0.10.0",
+    "require-main-filename": "^2.0.0"
   },
   "engines": {
-    "node": ">=v6.0.0"
+    "node": ">=v8.9.1"
   },
   "devDependencies": {
     "ava": "^0.19.1"
