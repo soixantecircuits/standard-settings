@@ -54,7 +54,7 @@ if (main) {
 }
 lookUpPaths.push(process.execPath)
 
-console.log(lookUpPaths)
+// console.log(lookUpPaths)
 
 for (let lookUpPath in lookUpPaths) {
   if (fs.existsSync(path.resolve(lookUpPaths[lookUpPath], secondarySettingsPath))) {
