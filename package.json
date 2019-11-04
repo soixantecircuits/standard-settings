@@ -32,6 +32,6 @@
     "node": ">=v8.9.1"
   },
   "devDependencies": {
-    "ava": "^0.19.1"
+    "ava": "^2.4.0"
   }
 }
