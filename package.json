@@ -25,7 +25,7 @@
   "homepage": "https://github.com/soixantecircuits/standard-settings#readme",
   "dependencies": {
     "assignment": "^2.2.1",
-    "nconf": "0.10.0",
+    "nconf": "0.11.4",
     "require-main-filename": "^2.0.0"
   },
   "engines": {
